@@ -1,52 +1,53 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { FcGoogle } from 'react-icons/fc'
-import useAuth from '../../hooks/useAuth'
-import { toast } from 'react-hot-toast'
-import { TbFidgetSpinner } from 'react-icons/tb'
+import { toast } from 'react-hot-toast';
+import { FcGoogle } from 'react-icons/fc';
+import { TbFidgetSpinner } from 'react-icons/tb';
+import { Link, useNavigate } from 'react-router-dom';
+import { imageUpload } from '../../API/utils';
+import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
-  const { createUser, updateUserProfile, signInWithGoogle, loading } = useAuth()
-  const navigate = useNavigate()
+  const { createUser, updateUserProfile, signInWithGoogle, loading } =
+    useAuth();
+  const navigate = useNavigate();
   // form submit handler
   const handleSubmit = async event => {
-    event.preventDefault()
-    const form = event.target
-    const name = form.name.value
-    const email = form.email.value
-    const password = form.password.value
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
+    const photoURL = await imageUpload(image);
 
     try {
       //2. User Registration
-      const result = await createUser(email, password)
+      const result = await createUser(email, password);
 
       //3. Save username & profile photo
-      await updateUserProfile(
-        name,
-        'https://lh3.googleusercontent.com/a/ACg8ocKUMU3XIX-JSUB80Gj_bYIWfYudpibgdwZE1xqmAGxHASgdvCZZ=s96-c'
-      )
-      console.log(result)
+      await updateUserProfile(name, photoURL);
+      console.log(result);
 
-      navigate('/')
-      toast.success('Signup Successful')
+      navigate('/');
+      toast.success('Signup Successful');
     } catch (err) {
-      console.log(err)
-      toast.error(err?.message)
+      console.log(err);
+      toast.error(err?.message);
     }
-  }
+  };
 
   // Handle Google Signin
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
+      await signInWithGoogle();
 
-      navigate('/')
-      toast.success('Signup Successful')
+      navigate('/');
+      toast.success('Signup Successful');
     } catch (err) {
-      console.log(err)
-      toast.error(err?.message)
+      console.log(err);
+      toast.error(err?.message);
     }
-  }
+  };
   return (
     <div className='flex justify-center items-center min-h-screen bg-white'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
@@ -158,7 +159,7 @@ const SignUp = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

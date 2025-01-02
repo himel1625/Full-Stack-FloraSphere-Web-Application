@@ -1,13 +1,14 @@
-import Container from '../Container'
-import { AiOutlineMenu } from 'react-icons/ai'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import useAuth from '../../../hooks/useAuth'
-import avatarImg from '../../../assets/images/placeholder.jpg'
-import logo from '../../../assets/images/logo-flat.png'
+import { useState } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
+import Logo from '../../.././../public/logo-square.png';
+import avatarImg from '../../../assets/images/placeholder.jpg';
+import useAuth from '../../../hooks/useAuth';
+import Container from '../Container';
+
 const Navbar = () => {
-  const { user, logOut } = useAuth()
-  const [isOpen, setIsOpen] = useState(false)
+  const { user, logOut } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='fixed w-full bg-white z-10 shadow-sm'>
@@ -16,7 +17,10 @@ const Navbar = () => {
           <div className='flex flex-row  items-center justify-between gap-3 md:gap-0'>
             {/* Logo */}
             <Link to='/'>
-              <img src={logo} alt='logo' width='100' height='100' />
+              <div className='flex  items-center justify-center'>
+                <img src={Logo} className='h12 w-8 h-8' alt='Logo Img' />
+                <p className='text-xl font-bold text-black'>FloraSphere</p>
+              </div>
             </Link>
             {/* Dropdown Menu */}
             <div className='relative'>
@@ -89,7 +93,7 @@ const Navbar = () => {
         </Container>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

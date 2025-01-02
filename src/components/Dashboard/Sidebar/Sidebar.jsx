@@ -1,25 +1,24 @@
-import { useState } from 'react'
-import { GrLogout } from 'react-icons/gr'
-import { FcSettings } from 'react-icons/fc'
-import { AiOutlineBars } from 'react-icons/ai'
-import { BsGraphUp } from 'react-icons/bs'
-import MenuItem from './Menu/MenuItem'
+import { useState } from 'react';
+import { AiOutlineBars } from 'react-icons/ai';
+import { BsGraphUp } from 'react-icons/bs';
+import { FcSettings } from 'react-icons/fc';
+import { GrLogout } from 'react-icons/gr';
+import MenuItem from './Menu/MenuItem';
 
-import useAuth from '../../../hooks/useAuth'
-
-import AdminMenu from './Menu/AdminMenu'
-import { Link } from 'react-router-dom'
-import SellerMenu from './Menu/SellerMenu'
-import CustomerMenu from './Menu/CustomerMenu'
-import logo from '../../../assets/images/logo-flat.png'
+import { Link } from 'react-router-dom';
+import Logo from '../../.././../public/logo-square.png';
+import useAuth from '../../../hooks/useAuth';
+import AdminMenu from './Menu/AdminMenu';
+import CustomerMenu from './Menu/CustomerMenu';
+import SellerMenu from './Menu/SellerMenu';
 const Sidebar = () => {
-  const { logOut } = useAuth()
-  const [isActive, setActive] = useState(false)
+  const { logOut } = useAuth();
+  const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
-    setActive(!isActive)
-  }
+    setActive(!isActive);
+  };
   return (
     <>
       {/* Small Screen Navbar */}
@@ -56,13 +55,10 @@ const Sidebar = () => {
           <div>
             <div className='w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-lime-100 mx-auto'>
               <Link to='/'>
-                <img
-                  // className='hidden md:block'
-                  src={logo}
-                  alt='logo'
-                  width='100'
-                  height='100'
-                />
+                <div className='flex  items-center justify-center'>
+                  <img src={Logo} className='h12 w-8 h-8' alt='Logo Img' />
+                  <p className='text-xl font-bold text-black'>FloraSphere</p>
+                </div>
               </Link>
             </div>
           </div>
@@ -97,13 +93,12 @@ const Sidebar = () => {
             className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'
           >
             <GrLogout className='w-5 h-5' />
-
             <span className='mx-4 font-medium'>Logout</span>
           </button>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
